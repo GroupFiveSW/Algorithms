@@ -61,4 +61,50 @@ public class LongestCommonSubstringTest {
         String result = LongestCommonSubstring.lcs(s1,s2);
         assertThat(result).isEqualTo("abcdef");
     }
+
+    /*
+    Inputs with an empty substring, tests that null is returned
+    */
+    @Test
+    public void testEmptySubstring(){
+        char[] s1 = {};
+        char[] s2 = {'a','b','c'};
+        String result = LongestCommonSubstring.lcs(s1,s2);
+        assertThat(result).isEqualTo(null);
+    }
+
+    /*
+    Inputs with null as inputs, tests that null is returned
+    */
+    @Test
+    public void testNullInput(){
+        char[] s1 = null;
+        char[] s2 = null;
+        String result = LongestCommonSubstring.lcs(s1,s2);
+        assertThat(result).isEqualTo(null);
+    }
+
+    /*
+    Inputs with same character multiplied still, tests that only one character is returned
+    */
+    @Test
+    public void testSameCharacterSubstring(){
+        char[] s1 = {'a','a','a'};
+        char[] s2 = {'a','b','c'};
+        String result = LongestCommonSubstring.lcs(s1,s2);
+        assertThat(result).isEqualTo("a");
+    }
+
+
+    /*
+    Inputs with Integer inputs, test that it does not return an exception/error aswell as not including it in the answer
+    */
+    @Test
+    public void testIntegerInput(){
+        char[] s1 = {1, 'a','c'};
+        char[] s2 = {'a','b'};
+        String result = LongestCommonSubstring.lcs(s1,s2);
+        assertThat(result).isEqualTo("a");
+    }
+
 }
