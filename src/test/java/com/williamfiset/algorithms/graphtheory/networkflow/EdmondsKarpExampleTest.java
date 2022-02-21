@@ -1,8 +1,9 @@
-package com.williamfiset.algorithms.graphtheory.networkflow.examples;
+package com.williamfiset.algorithms.graphtheory.networkflow;
 
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import com.williamfiset.algorithms.graphtheory.networkflow.examples.EdmondsKarpExample;
+import static com.google.common.truth.Truth.assertThat;
+import org.junit.Test;
 
 public class EdmondsKarpExampleTest {
 
@@ -12,7 +13,7 @@ public class EdmondsKarpExampleTest {
      * for the first shortest path should be 11.
      */
     @Test
-    void bfsOneIterationTest() {
+    public void bfsOneIterationTest() {
         int n = 6;
 
         int s = n-2;
@@ -35,7 +36,7 @@ public class EdmondsKarpExampleTest {
         solver.addEdge(3,t, 4);
 
         long flow = solver.bfs();
-        Assertions.assertEquals(flow, 11);
+        assertThat(flow == 11);
     }
 
     /**
@@ -44,7 +45,7 @@ public class EdmondsKarpExampleTest {
      * it won't be reachable and thus bfs should return 0.
      */
     @Test
-    void bfsSinkNotReachableTest() {
+    public void bfsSinkNotReachableTest() {
         int n = 6;
 
         int s = n-2;
@@ -65,7 +66,7 @@ public class EdmondsKarpExampleTest {
         // No edges to sink to make it unreachable
 
         long flow = solver.bfs();
-        Assertions.assertEquals(flow, 0);
+        assertThat(flow == 0);
     }
 
 
