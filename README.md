@@ -53,7 +53,16 @@ We were tasked with documenting our way-of-working according to the Essence-stan
 - Implement thorough README.md (#23)
 
 ### Gustaf Halvardsson
-- Task
+- **Task 1:** Identify and Assign a unique ID to each branch. (Together with Alexander and Elias) (#10)
+- **Task 1:** Implement unit test structure for Task 1 (#22)
+- **Task 1:** Document the answers for 3.3 Onboarding (#20)
+- **Task 1:** Research framework for code coverage implementation  (Together with Alexander) (#9)
+- **Task 1:** Create data structures that hold coverage information (Together with Alexander and Elias) (#11)
+- **Task 1:** Write information about taken branches into a file or to console (Together with Alexander and Elias) (#12)
+- **Task 1:** Implement unit test structure for Task 1 (Together with Alexander and Elias) (#22)
+- **Task 2:** Identify 2 high-complexity methods (Together with everyone) (#2)
+- **Task 2:** Write four tests for lcs() (#18)
+- **Task 4:** Self Assesment Essence (#19)
 
 ### Alexander Krantz
 - Task
