@@ -87,7 +87,11 @@ We were tasked with documenting our way-of-working according to the Essence-stan
 - Document coverage percent before and after written tests (Together with Gabriel) (#28)
 
 ### Oscar Spolander
-- Task
+- **Task 2 Identify 2 high-complexity methods (Together with everyone) (#2)
+- **Task 2 Implement four tests for lcs() (#24)
+- **Task 2 Count Code Complexity by hand (Together with Gabriel) (#15)
+- **Task 3 Describe Refactorization (#7)
+- Document Complexity reasoning (With Gabriel)
 
 ## How to run the code
 Thanks to the already existing configuration of the Algorithms-repo you can run, build and test the code in the most easy manner with your integrated IDE (like Intellij for ex.) in accordance to their onboarding.
