@@ -46,7 +46,11 @@ We were tasked with documenting our way-of-working according to the Essence-stan
 (# = IssueNumber on Github if applicable)
 
 ### Gabriel Acar
-- Task
+- **Task 2:** Identify 2 high-complexity methods (Together with everyone) (#2)
+- Document the answers for 3.4 Complexity measurement (Togeather with Oscar) (#21)
+- **Task 2:** Implement four tests for lineSegmentLineSegmentIntersection() (#32)
+- Count code complexity by hand (Togeather with Oscar) (#15)
+- Document coverage percent before and after written tests (Togeather with Alexander) (#28)
 
 ### Elias Bonnici
 - **Task 1:** Identify and Assign a unique ID to each branch. (Together with Alexander and Gustaf) (#10)
