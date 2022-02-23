@@ -87,6 +87,7 @@ We were tasked with documenting our way-of-working according to the Essence-stan
 - Document coverage percent before and after written tests (Together with Gabriel) (#28)
 
 ### Oscar Spolander
+
 - **Task 2 Identify 2 high-complexity methods (Together with everyone) (#2)
 - **Task 2 Implement four tests for lcs() (#24)
 - **Task 2 Count Code Complexity by hand (Together with Gabriel) (#15)
