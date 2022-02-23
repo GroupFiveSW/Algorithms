@@ -49,7 +49,13 @@ We were tasked with documenting our way-of-working according to the Essence-stan
 - Task
 
 ### Elias Bonnici
-- Code Coverage tool, task 1 (#8)
+- **Task 1:** Identify and Assign a unique ID to each branch. (Together with Alexander and Gustaf) (#10)
+- **Task 1:** Create data structures that hold coverage information (Together with Alexander and Gustaf) (#11)
+- **Task 1:** Write information about taken branches into a file or to console (Together with Alexander and Gustaf) (#12)
+- **Task 1:** Implement unit test structure for Task 1 (Together with Alexander and Gustaf) (#22)
+- **Task 2:** Identify 2 high-complexity methods (Together with everyone) (#2)
+- **Task 2:** Implement two tests for bfs() (#30)
+- **Task 2:** Implement two tests for bellmanFord() (#31)
 - Implement thorough README.md (#23)
 
 ### Gustaf Halvardsson
