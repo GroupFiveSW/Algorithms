@@ -59,7 +59,10 @@ We were tasked with documenting our way-of-working according to the Essence-stan
 - Task
 
 ### Oscar Spolander
-- Task
+- Implement unit tests for lcs() (#24)
+- Document Complexity reasoning (#27) (with Gabriel)
+- Count Code complexity by hand (#15) (with Gabriel)
+- Describe refactorization #7
 
 ## How to run the code
 Thanks to the already existing configuration of the Algorithms-repo you can run, build and test the code in the most easy manner with your integrated IDE (like Intellij for ex.) in accordance to their onboarding.
