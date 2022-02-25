@@ -94,6 +94,15 @@ We were tasked with documenting our way-of-working according to the Essence-stan
 - **Task 3 Describe Refactorization (#7)
 - Document Complexity reasoning (With Gabriel)
 
+## Motivation for pass with distinction (P+)
+
+### Criteria 5 (Something else that is extraordinary, at the discretion of the examiner)
+Judging by the requirements stated for the DIY tool (task 3.5.1) we feel that we have exceeded the expectations. The assignment suggests to "Implement branch coverage through manual instrumentation of the source code...". However, we have built a branch coverage tool that automatically detects and injects code into branches of predefined functions (which are defined before running the tool in the following [setup file](https://github.com/GroupFiveSW/Coveraged/blob/main/src/setup/setupfull.txt)). 
+
+After the code is injected, our tool runs Gradle test (with the injected code) for the specified project as a background process. And, whenever one of the branches of the predefined functions are taken, our injected code executes and stores the necessary information on file. At the end of the program we are able to read the information from the file and calculate the branch coverage for the functions as well as the total branch coverage.
+
+To sum up, all of these features makes our tool very generic, scalable and basically applicable for any Gradle-based project. More information about the tool and its source code can be found [here](https://github.com/GroupFiveSW/Coveraged). 
+
 ## How to run the code
 Thanks to the already existing configuration of the Algorithms-repo you can run, build and test the code in the most easy manner with your integrated IDE (like Intellij for ex.) in accordance to their onboarding.
 
