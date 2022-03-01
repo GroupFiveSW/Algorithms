@@ -38,7 +38,7 @@ public class RopeTest {
     @Test
     public void testInsertAtIndexSingleStart() {
         Rope rope = Rope.toRope("Word");
-        rope.insert(0, Rope.toRope("A"));
+        rope = rope.insert(0, Rope.toRope("A"));
         assertThat(rope.toString()).isEqualTo("AWord");
         assertThat(rope.index(0)).isEqualTo('A');
     }
@@ -47,7 +47,7 @@ public class RopeTest {
     @Test
     public void testInsertAtIndexSingleEnd() {
         Rope rope = Rope.toRope("Word");
-        rope.insert(4, Rope.toRope("A"));
+        rope = rope.insert(4, Rope.toRope("A"));
         assertThat(rope.toString()).isEqualTo("WordA");
         assertThat(rope.index(4)).isEqualTo('A');
     }
@@ -56,7 +56,7 @@ public class RopeTest {
     @Test
     public void testInsertAtIndexFullStart() {
         Rope rope = Rope.toRope("Word");
-        rope.insert(0, Rope.toRope("Another"));
+        rope = rope.insert(0, Rope.toRope("Another"));
         assertThat(rope.toString()).isEqualTo("AnotherWord");
         assertThat(rope.index(0)).isEqualTo('A');
     }
@@ -65,7 +65,7 @@ public class RopeTest {
     @Test
     public void testInsertAtIndexFullEnd() {
         Rope rope = Rope.toRope("Word");
-        rope.insert(4, Rope.toRope("Another"));
+        rope = rope.insert(4, Rope.toRope("Another"));
         assertThat(rope.toString()).isEqualTo("WordAnother");
         assertThat(rope.index(4)).isEqualTo('A');
     }

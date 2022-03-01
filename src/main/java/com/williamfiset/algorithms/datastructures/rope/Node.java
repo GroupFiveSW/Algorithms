@@ -77,7 +77,9 @@ public class Node extends Rope {
 
     @Override
     public Rope insert(int i, Rope other) {
-        return null;
+        RopePair pair = this.split(i-1);
+        Rope newRope = pair.getLeft().concat(other);
+        return newRope.concat(pair.getRight());
     }
 
     @Override
