@@ -75,10 +75,29 @@ public class Rope {
         }
         return currentNode.str.charAt(i);
     }
+
+    @Override
+    public String toString(){
+        StringBuffer buffer = new StringBuffer();
+        buildBuffer(buffer, root);
+        return buffer.toString();
+    }
+
+    private void buildBuffer(StringBuffer buffer, Node node) {
+        if (node == null) {
+            return;
+        }
+        if (node.str != null) {
+            buffer.append(node.str);
+            return;
+        }
+        buildBuffer(buffer, node.left);
+        buildBuffer(buffer, node.right);
+    }
+
     public static void main(String[] args) {
         Rope r = new Rope("golfbanan");
         //System.out.print("\n\n count root right:  " + r.root.right.left.count);
         System.out.println(r.index(5));;
-
     }
 }

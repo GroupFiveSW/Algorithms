@@ -27,6 +27,17 @@ public class RopeTest {
     }
 
     /**
+     * Tests that an identical instance of the original String object can be reconstructed
+     * with the overridden toString method.
+     */
+    @Test
+    public void testToString() {
+        String expected = "This is a longer string";
+        Rope rope = new Rope(expected);
+        assertThat(rope.toString()).isEqualTo(expected);
+    }
+
+    /**
      * Test case that tests REQ-2 (that <code>Index(i)</code> should return the character at position i).
      * In the following test case the string is "test" and thus, <code>Index(2)</code> should return "s".
      */
