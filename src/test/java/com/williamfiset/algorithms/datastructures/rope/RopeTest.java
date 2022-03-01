@@ -37,6 +37,48 @@ public class RopeTest {
         assertThat(rope.toString()).isEqualTo(expected);
     }
 
+
+    /**
+     * Test cases that tests REQ-1 that Insert(i,S)
+     * should insert the string S beginning at position i in the string s, to form a new string
+     */
+
+    //Test for REQ-1 with single letter at start
+    @Test
+    public void testInsertAtIndexSingleStart(){
+        Rope rope = new Rope("Word");
+        rope.insert(0,"A");
+        assertThat(rope.toString()).isEqualTo("AWord");
+        assertThat(rope.index(0)).isEqualTo('A');
+    }
+
+    //Test for REQ-1 with single letter at end
+    @Test
+    public void testInsertAtIndexSingleEnd(){
+        Rope rope = new Rope("Word");
+        rope.insert(4,"A");
+        assertThat(rope.toString()).isEqualTo("WordA");
+        assertThat(rope.index(4)).isEqualTo('A');
+    }
+
+    //Test for REQ-1 with full word at start
+    @Test
+    public void testInsertAtIndexFullStart(){
+        Rope rope = new Rope("Lorem");
+        rope.insert(0,"Another");
+        assertThat(rope.toString()).isEqualTo("AnotherWord");
+        assertThat(rope.index(0)).isEqualTo('A');
+    }
+
+    //Test for REQ-1 with full word at end
+    @Test
+    public void testInsertAtIndexFullEnd(){
+        Rope rope = new Rope("Word");
+        rope.insert(4,"Another");
+        assertThat(rope.toString()).isEqualTo("WordAnother");
+        assertThat(rope.index(4)).isEqualTo('A');
+    }
+
     /**
      * Test case that tests REQ-2 (that <code>Index(i)</code> should return the character at position i).
      * In the following test case the string is "test" and thus, <code>Index(2)</code> should return "s".
@@ -81,4 +123,6 @@ public class RopeTest {
         newLeaf.count = s.length();
         return newLeaf;
     }
+
+
 }
