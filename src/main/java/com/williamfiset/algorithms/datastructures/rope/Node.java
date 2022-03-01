@@ -68,78 +68,33 @@ public class Node extends Rope {
         }
     }
 
-    private Leaf getLeaf(Rope rope, int index) {
-        if (rope instanceof Leaf) {
-            return (Leaf) rope;
-        }
-        Node node = (Node) rope;
-        if (index < node.count) {
-            return getLeaf(node.left, index);
-        }
-        return getLeaf(node.right, index - count);
-    }
-
-
     @Override
     public Rope report(int start, int length) {
-        int finish = start + length;
-        Rope currentNode = this;
-
-        Leaf startLeaf = getLeaf(this, start);
-
-        while (left != null) {
-            if (finish < count) {
-                break;
-            } else {
-                currentNode = left;
-            }
-        }
-
-        String output = "";
-
-        while (length > 0) {
-            if ()
-        }
-        return;
+        RopePair leftPair = split(start);
+        RopePair rightPair = leftPair.getRight().split(length);
+        return rightPair.getLeft();
     }
 
+    @Override
+    public Rope insert(int i, Rope other) {
+        return null;
+    }
 
-
+    @Override
+    public Rope delete(int start, int length) {
+        return null;
+    }
 
     @Override
     public RopePair split(int i) {
-        Node currentNode = this;
-        String lastDir = "";
-        while (currentNode.left != null) {
-            if (i < count) {
-                //currentNode = left;
-            } else {
-                //con
-                i -= count;
-                ///currentNode = right;
-            }
+        if (i <= count) {
+            RopePair leftPair = left.split(i);
+            Rope right = leftPair.getRight().concat(this.right);
+            return new RopePair(leftPair.getLeft(), right);
         }
-
-        Leaf leaf = new Leaf("");
-        String frontString = leaf.str.substring(0, i);
-
-        if (frontString.length() != leaf.str.length()) {
-
-            String tail = leaf.str.substring(i);
-            Leaf leftLeaf = new Leaf(frontString);
-
-            Node newParent = currentNode;
-
-            newParent.left = leftLeaf;
-
-            Leaf rightLeaf = new Leaf(tail);
-
-            newParent.right = rightLeaf;
-        }
-
-//        if(i>=0 && i< leaf.str.length()){
-//            Node left = new Node();
-//        }
+        RopePair rightPair = right.split(i - count);
+        Rope left = this.left.concat(rightPair.getLeft());
+        return new RopePair(left, rightPair.getRight());
 
     }
 }

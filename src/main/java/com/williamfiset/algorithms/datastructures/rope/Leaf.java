@@ -31,9 +31,19 @@ public class Leaf extends Rope{
     }
 
     @Override
+    public Rope insert(int i, Rope other) {
+        return null;
+    }
+
+    @Override
+    public Rope delete(int start, int length) {
+        return null;
+    }
+
+    @Override
     public RopePair split(int i) {
-        String s1 = str.substring(0, i);
-        String s2 = str.substring(i);
+        String s1 = str.substring(0, i + 1);
+        String s2 = str.substring(i + 1);
         return new RopePair(new Leaf(s1),new Leaf(s2));
     }
 

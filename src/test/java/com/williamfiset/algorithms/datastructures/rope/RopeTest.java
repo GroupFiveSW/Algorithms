@@ -36,36 +36,36 @@ public class RopeTest {
 
     //Test for REQ-1 with single letter at start
     @Test
-    public void testInsertAtIndexSingleStart(){
+    public void testInsertAtIndexSingleStart() {
         Rope rope = Rope.toRope("Word");
-        rope.insert(0,"A");
+        rope.insert(0, Rope.toRope("A"));
         assertThat(rope.toString()).isEqualTo("AWord");
         assertThat(rope.index(0)).isEqualTo('A');
     }
 
     //Test for REQ-1 with single letter at end
     @Test
-    public void testInsertAtIndexSingleEnd(){
+    public void testInsertAtIndexSingleEnd() {
         Rope rope = Rope.toRope("Word");
-        rope.insert(4,"A");
+        rope.insert(4, Rope.toRope("A"));
         assertThat(rope.toString()).isEqualTo("WordA");
         assertThat(rope.index(4)).isEqualTo('A');
     }
 
     //Test for REQ-1 with full word at start
     @Test
-    public void testInsertAtIndexFullStart(){
+    public void testInsertAtIndexFullStart() {
         Rope rope = Rope.toRope("Word");
-        rope.insert(0,"Another");
+        rope.insert(0, Rope.toRope("Another"));
         assertThat(rope.toString()).isEqualTo("AnotherWord");
         assertThat(rope.index(0)).isEqualTo('A');
     }
 
     //Test for REQ-1 with full word at end
     @Test
-    public void testInsertAtIndexFullEnd(){
+    public void testInsertAtIndexFullEnd() {
         Rope rope = Rope.toRope("Word");
-        rope.insert(4,"Another");
+        rope.insert(4, Rope.toRope("Another"));
         assertThat(rope.toString()).isEqualTo("WordAnother");
         assertThat(rope.index(4)).isEqualTo('A');
     }
@@ -85,7 +85,7 @@ public class RopeTest {
      * In the following test case the string is "test_test" and thus, <code>Index(4)</code> should return "_".
      */
     @Test
-    public void testIndexUnderScore(){
+    public void testIndexUnderScore() {
         Rope rope = Rope.toRope("test_test");
         assertThat(rope.index(4)).isEqualTo('_');
     }
@@ -97,7 +97,7 @@ public class RopeTest {
      */
     //Test for REQ-3 that should return two words, split in middle
     @Test
-    public void testSplitInMiddle(){
+    public void testSplitInMiddle() {
         Rope rope = Rope.toRope("Word");
         RopePair expected = rope.split(1);
         String left = expected.getLeft().toString();
@@ -109,7 +109,7 @@ public class RopeTest {
 
     //Test for REQ-3 that should return two words, split at the end
     @Test
-    public void testSplitAtEnd(){
+    public void testSplitAtEnd() {
         Rope rope = Rope.toRope("Word");
         RopePair expected = rope.split(3);
         String left = expected.getLeft().toString();
@@ -126,33 +126,33 @@ public class RopeTest {
      */
     //Test for REQ-4 that should a string where the middle is deleted
     @Test
-    public void testDeleteInMiddle(){
+    public void testDeleteInMiddle() {
         Rope rope = Rope.toRope("Word");
-        rope.delete(1,2);
+        rope.delete(1, 2);
         assertThat(rope.toString()).isEqualTo("Wd");
     }
 
     //Test for REQ-4 that should return a string where the start is deleted
     @Test
-    public void testDeleteInStart(){
+    public void testDeleteInStart() {
         Rope rope = Rope.toRope("Word");
-        rope.delete(0,2);
+        rope.delete(0, 2);
         assertThat(rope.toString()).isEqualTo("rd");
     }
 
     //Test for REQ-4 that should return a string where the end is deleted
     @Test
-    public void testDeleteInEnd(){
+    public void testDeleteInEnd() {
         Rope rope = Rope.toRope("Word");
-        rope.delete(1,3);
+        rope.delete(1, 3);
         assertThat(rope.toString()).isEqualTo("W");
     }
 
     //Test for REQ-4 that should return an empty string
     @Test
-    public void testDeleteEntireString(){
+    public void testDeleteEntireString() {
         Rope rope = Rope.toRope("Word");
-        rope.delete(0,3);
+        rope.delete(0, 3);
         assertThat(rope.toString()).isEqualTo("");
     }
 
@@ -166,8 +166,23 @@ public class RopeTest {
         String s2 = "Second part of it";
         String expected = s1 + s2;
         Rope rope = Rope.toRope(s1);
-        rope.concat(Rope.toRope(s2));
+        rope = rope.concat(Rope.toRope(s2));
         assertThat(rope.toString()).isEqualTo(expected);
+    }
+
+    /**
+     * Test case that tests REQ-3 (that <code>split(i)</code> splits the rope at index i).
+     * Tests that a normal string is split properly at the correct place.
+     */
+    @Test
+    public void testSplit() {
+        String s1 = "First part of the string";
+        String s2 = "Second part of it";
+        String concat = s1 + s2;
+        Rope rope = Rope.toRope(concat);
+        RopePair pair = rope.split(s1.length() - 1);
+        assertThat(pair.getLeft().toString()).isEqualTo(s1);
+        assertThat(pair.getRight().toString()).isEqualTo(s2);
     }
 
     private static int totalCount(Rope rope) {
@@ -177,7 +192,7 @@ public class RopeTest {
         if (rope instanceof Leaf) {
             return ((Leaf) rope).str.length();
         }
-        Node node = (Node)rope;
+        Node node = (Node) rope;
         return totalCount(node.left) + totalCount(node.right);
     }
 

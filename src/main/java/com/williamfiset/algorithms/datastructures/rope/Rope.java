@@ -43,6 +43,10 @@ public abstract class Rope {
 
     public abstract Rope report(int start, int length);
 
+    public abstract Rope insert(int i, Rope other);
+
+    public abstract Rope delete(int start, int length);
+
     public static void main(String[] args) {
         Rope r = Rope.toRope("golfbanan");
         //System.out.print("\n\n count root right:  " + r.root.right.left.count);
