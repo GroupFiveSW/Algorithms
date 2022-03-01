@@ -59,7 +59,9 @@ public class Rope {
 
     public Rope(String s){
         this.root = new Node(s.length());
-        treeBuilder(root,s);
+        Node left = new Node();
+        this.root.left = left;
+        treeBuilder(left,s);
     }
 
     public char index(int i){
@@ -75,10 +77,21 @@ public class Rope {
         }
         return currentNode.str.charAt(i);
     }
+
+    /**
+     * Concatenates the new string on to the rope.
+     * @param newStr String to be concatenated.
+     */
+    public void concat(String newStr){
+        Rope newRope = new Rope(newStr);
+        root.right = newRope.root.left;
+        Node newRoot = new Node();
+        newRoot.left = root;
+        newRoot.count = newRoot.left.count + newRope.root.count;
+        root = newRoot;
+    }
+
     public static void main(String[] args) {
         Rope r = new Rope("golfbanan");
-        //System.out.print("\n\n count root right:  " + r.root.right.left.count);
-        System.out.println(r.index(5));;
-
     }
 }

@@ -11,7 +11,7 @@ public class RopeTest {
      */
     @Test
     public void testEmpty(){
-        Rope.Node expected = leaf("");
+        Rope.Node expected = node(leaf(""), null);
         Rope rope = new Rope("");
         assertThat(new NodeWrapper(rope.root)).isEqualTo(expected);
     }
@@ -21,7 +21,7 @@ public class RopeTest {
      */
     @Test
     public void testOne() {
-        Rope.Node expected = leaf("a");
+        Rope.Node expected = node(leaf("a"), null);
         Rope rope = new Rope("a");
         assertThat(new NodeWrapper(rope.root)).isEqualTo(expected);
     }
