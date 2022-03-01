@@ -57,6 +57,20 @@ public class RopeTest {
         assertThat(rope.index(4)).isEqualTo('_');
     }
 
+    /**
+     * Test case that tests REQ-6 (that <code>concat(s)</code> concatenates the rope with s).
+     * Tests that a small string concatenates correctly with another small string.
+     */
+    @Test
+    public void testConcat() {
+        String s1 = "First part of the string";
+        String s2 = "Second part of it";
+        String expected = s1 + s2;
+        Rope rope = new Rope(s1);
+        rope.concat(s2);
+        assertThat(rope.toString()).isEqualTo(expected);
+    }
+
     private static int totalCount(Rope.Node node) {
         if (node == null) {
             return 0;
