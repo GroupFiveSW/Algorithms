@@ -1,128 +1,140 @@
 package com.williamfiset.algorithms.datastructures.rope;
 
-public class Node extends Rope{
-        int count;
-        Node left;
-        Node right;
+public class Node extends Rope {
+    Rope left;
+    Rope right;
 
+    public Node(int count) {
+        this.count = count;
+    }
 
-        public Node(int count, String str) {
-            this.count = count;
-            this.str = str;
-        }
+    public Node() {
+        count = 0;
+        left = null;
+        right = null;
+    }
 
-        public Node(int count) {
-            this.count = count;
-        }
+    void setLeft(Rope rope) {
+        left = rope;
+        count = rope.totalCount;
+        totalCount = rope.totalCount + (right == null ? 0 : right.totalCount);
+    }
 
-        public Node() {
-            count = 0;
-            str = null;
-            left = null;
-            right = null;
-        }
+    void setRight(Rope rope) {
+        right = rope;
+        totalCount = rope.totalCount + (left == null ? 0 : left.totalCount);
+    }
 
     @Override
-    public char index(int i){
-        Rope.Node currentNode = root;
-        while(currentNode.left != null){
-            if(i<currentNode.count){
-                currentNode=currentNode.left;
-            }
-            else{
-                i-= currentNode.count;
-                currentNode=currentNode.right;
-            }
+    public char index(int i) {
+        if (i < count) {
+            return left.index(i);
         }
-        return currentNode.str.charAt(i);
+        return right.index(i - count);
     }
 
 
     /**
      * Concatenates the new string on to the rope.
-     * @param newStr String to be concatenated.
+     *
+     * @param other rope to be concatenated to this rope.
      */
     @Override
-    public void concat(String newStr){
-        Rope newRope = new Rope(newStr);
-        root.right = newRope.root.left;
+    public Rope concat(Rope other) {
         Node newRoot = new Node();
-        newRoot.left = root;
-        newRoot.count = newRoot.left.count + newRope.root.count;
-        root = newRoot;
+        newRoot.setLeft(this);
+        newRoot.setRight(other);
+        return newRoot;
     }
 
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuffer buffer = new StringBuffer();
-        buildBuffer(buffer, root);
+        buildBuffer(buffer);
         return buffer.toString();
     }
 
-
-    private void buildBuffer(StringBuffer buffer, Node node) {
-        if (node == null) {
-            return;
+    private void buildBuffer(StringBuffer buffer) {
+        if (left instanceof Node) {
+            ((Node) left).buildBuffer(buffer);
+        } else if (left instanceof Leaf) {
+            buffer.append(left);
         }
-        if (node.str != null) {
-            buffer.append(node.str);
-            return;
+        if (right instanceof Node) {
+            ((Node) right).buildBuffer(buffer);
+        } else if (right instanceof Leaf) {
+            buffer.append(right);
         }
-        buildBuffer(buffer, node.left);
-        buildBuffer(buffer, node.right);
     }
 
+    private Leaf getLeaf(Rope rope, int index) {
+        if (rope instanceof Leaf) {
+            return (Leaf) rope;
+        }
+        Node node = (Node) rope;
+        if (index < node.count) {
+            return getLeaf(node.left, index);
+        }
+        return getLeaf(node.right, index - count);
+    }
+
+
     @Override
-    public void report(int start, int finish){
-        Node currentNode = root;
-        while(currentNode.left!=null){
-            if(start<currentNode.count){
-                currentNode = currentNode.left;
-            }
-            else{
-                start-= currentNode.count;
-                currentNode = currentNode.right;
+    public Rope report(int start, int length) {
+        int finish = start + length;
+        Rope currentNode = this;
+
+        Leaf startLeaf = getLeaf(this, start);
+
+        while (left != null) {
+            if (finish < count) {
+                break;
+            } else {
+                currentNode = left;
             }
         }
+
         String output = "";
 
-//        int subLen = finish-start;
-//        while (subLen > 0){
-//            if()
-//        }
+        while (length > 0) {
+            if ()
+        }
         return;
     }
 
 
+
+
     @Override
-    public void split(int i){
-        Node currentNode = root;
+    public RopePair split(int i) {
+        Node currentNode = this;
         String lastDir = "";
-        while(currentNode.left!=null){
-            if(i<currentNode.count){
-                lastDir = "left";
-                currentNode = currentNode.left;
-            }
-            else{
-                Rope leftRope = new Rope(currentNode.left.str);
+        while (currentNode.left != null) {
+            if (i < count) {
+                //currentNode = left;
+            } else {
                 //con
-                lastDir = "right";
-                i-= currentNode.count;
-                currentNode = currentNode.right;
+                i -= count;
+                ///currentNode = right;
             }
         }
 
-        Node leaf = currentNode;
-        String frontString = leaf.str.substring(0,i);
+        Leaf leaf = new Leaf("");
+        String frontString = leaf.str.substring(0, i);
 
-        if(frontString.length() != leaf.str.length()){
+        if (frontString.length() != leaf.str.length()) {
+
             String tail = leaf.str.substring(i);
-            Node leftLeaf = new Node(frontString.length(), frontString);
-            leaf.left = leftLeaf;
+            Leaf leftLeaf = new Leaf(frontString);
 
-            Node rightLeaf = new Node(tail.length(), tail);
-            leaf.right = rightLeaf;
+            Node newParent = currentNode;
+
+            newParent.left = leftLeaf;
+
+            Leaf rightLeaf = new Leaf(tail);
+
+            newParent.right = rightLeaf;
         }
 
 //        if(i>=0 && i< leaf.str.length()){

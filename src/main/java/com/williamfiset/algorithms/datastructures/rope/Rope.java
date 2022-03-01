@@ -7,58 +7,44 @@ public abstract class Rope {
 
     final static int leafLength = 3;
 
+    protected int count = 0;
+    protected int totalCount = 0;
 
-    public static void treeBuilder(Node parent, String s){
+    static Rope treeBuilder(String s){
         int len = s.length();
         if(len <= leafLength){
-            parent.count = len;
-            return;
+            Leaf leaf = new Leaf(s);
+            return leaf;
         }
-        String leftStr = s.substring(0,(len/2));
-        Node left = new Node();
-        parent.left = left;
+        Node node = new Node();
 
+        String leftStr = s.substring(0,(len/2));
+        node.setLeft(treeBuilder(leftStr));
 
         String rightStr = s.substring((len/2));
-        Node right = new Node();
-        parent.right = right;
+        node.setRight(treeBuilder(rightStr));
 
-        treeBuilder(left, leftStr);
-
-        treeBuilder(right, rightStr);
-
-        parent.count = parent.left.count;
-
-        if (parent.left.right != null){
-            parent.count += parent.left.right.count;
-        }
-        return;
+        return node;
     }
 
     public static Rope toRope(String s){
-        Node root = new Node(s.length());
-        Node left = new Node();
-        root.left = left;
-        treeBuilder(left,s);
-        return root;
+        return treeBuilder(s);
     }
 
     public abstract char index(int i);
 
-
-    public abstract  void split(int i);
-
+    public abstract RopePair split(int i);
 
     /**
      * Concatenates the new string on to the rope.
-     * @param newStr String to be concatenated.
+     * @param other rope to be concatenated on this rope.
      */
-    public abstract void concat(String newStr);
+    public abstract Rope concat(Rope other);
 
-    public abstract Rope report(int start, int finish);
+    public abstract Rope report(int start, int length);
 
     public static void main(String[] args) {
-        Rope r = new Rope("golfbanan");
+        Rope r = Rope.toRope("golfbanan");
         //System.out.print("\n\n count root right:  " + r.root.right.left.count);
         System.out.println(r.index(5));;
         System.out.println("char at index 5:   " + r.index(5));

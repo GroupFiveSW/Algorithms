@@ -5,26 +5,17 @@ import static com.google.common.truth.Truth.assertThat;
 import org.junit.*;
 
 public class RopeTest {
-
     /**
-     * Tests that an empty string results in a proper structure.
+     * Tests that an empty instance of the original String object can be reconstructed
+     * with the overridden toString method.
      */
     @Test
-    public void testEmpty(){
-        Rope.Node expected = node(leaf(""), null);
-        Rope rope = new Rope("");
-        assertThat(new NodeWrapper(rope.root)).isEqualTo(expected);
+    public void testToStringEmpty() {
+        String expected = "";
+        Rope rope = Rope.toRope(expected);
+        assertThat(rope.toString()).isEqualTo(expected);
     }
 
-    /**
-     * Tests that a trivial non empty string results in a simple structure.
-     */
-    @Test
-    public void testOne() {
-        Rope.Node expected = node(leaf("a"), null);
-        Rope rope = new Rope("a");
-        assertThat(new NodeWrapper(rope.root)).isEqualTo(expected);
-    }
 
     /**
      * Tests that an identical instance of the original String object can be reconstructed
@@ -33,7 +24,7 @@ public class RopeTest {
     @Test
     public void testToString() {
         String expected = "This is a longer string";
-        Rope rope = new Rope(expected);
+        Rope rope = Rope.toRope(expected);
         assertThat(rope.toString()).isEqualTo(expected);
     }
 
@@ -85,7 +76,7 @@ public class RopeTest {
      */
     @Test
     public void testIndex() {
-        Rope rope = new Rope("test");
+        Rope rope = Rope.toRope("test");
         assertThat(rope.index(2)).isEqualTo('s');
     }
 
@@ -95,37 +86,9 @@ public class RopeTest {
      */
     @Test
     public void testIndexUnderScore(){
-        Rope rope = new Rope("test_test");
+        Rope rope = Rope.toRope("test_test");
         assertThat(rope.index(4)).isEqualTo('_');
     }
-
-
-
-    private static int totalCount(Rope.Node node) {
-        if (node == null) {
-            return 0;
-        }
-        if (node.str != null) {
-            return node.count;
-        }
-        return totalCount(node.left) + totalCount(node.right);
-    }
-
-    private static Rope.Node node(Rope.Node left, Rope.Node right) {
-        Rope.Node newNode = new Rope.Node();
-        newNode.left = left;
-        newNode.right = right;
-        newNode.count = totalCount(left);
-        return newNode;
-    }
-
-    private static Rope.Node leaf(String s) {
-        Rope.Node newLeaf = new Rope.Node();
-        newLeaf.str = s;
-        newLeaf.count = s.length();
-        return newLeaf;
-    }
-
 
     /**
      * Test case that tests REQ-6 (that <code>concat(s)</code> concatenates the rope with s).
@@ -136,10 +99,31 @@ public class RopeTest {
         String s1 = "First part of the string";
         String s2 = "Second part of it";
         String expected = s1 + s2;
-        Rope rope = new Rope(s1);
-        rope.concat(s2);
+        Rope rope = Rope.toRope(s1);
+        rope.concat(Rope.toRope(s2));
         assertThat(rope.toString()).isEqualTo(expected);
     }
 
+    private static int totalCount(Rope rope) {
+        if (rope == null) {
+            return 0;
+        }
+        if (rope instanceof Leaf) {
+            return ((Leaf) rope).str.length();
+        }
+        Node node = (Node)rope;
+        return totalCount(node.left) + totalCount(node.right);
+    }
 
+    private static Node node(Rope left, Rope right) {
+        Node newNode = new Node();
+        newNode.left = left;
+        newNode.right = right;
+        newNode.count = totalCount(left);
+        return newNode;
+    }
+
+    private static Leaf leaf(String s) {
+        return new Leaf(s);
+    }
 }
