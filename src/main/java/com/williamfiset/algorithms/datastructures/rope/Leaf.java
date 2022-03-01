@@ -39,7 +39,7 @@ public class Leaf extends Rope{
 
     @Override
     public Rope delete(int start, int length) {
-        return null;
+        return new Leaf(new String(str.substring(0, start).concat(str.substring(start + length - 1))));
     }
 
     @Override

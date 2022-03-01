@@ -84,12 +84,14 @@ public class Node extends Rope {
 
     @Override
     public Rope delete(int start, int length) {
-        return null;
+        RopePair leftPair = this.split(start-1);
+        RopePair rightPair = leftPair.getRight().split(length-1);
+        return leftPair.getLeft().concat(rightPair.getRight());
     }
 
     @Override
     public RopePair split(int i) {
-        if (i <= count) {
+        if (i < count) {
             RopePair leftPair = left.split(i);
             Rope right = leftPair.getRight().concat(this.right);
             return new RopePair(leftPair.getLeft(), right);

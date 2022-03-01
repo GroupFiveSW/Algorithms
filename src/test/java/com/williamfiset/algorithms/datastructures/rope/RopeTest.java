@@ -128,7 +128,7 @@ public class RopeTest {
     @Test
     public void testDeleteInMiddle() {
         Rope rope = Rope.toRope("Word");
-        rope.delete(1, 2);
+        rope = rope.delete(1, 2);
         assertThat(rope.toString()).isEqualTo("Wd");
     }
 
@@ -136,7 +136,7 @@ public class RopeTest {
     @Test
     public void testDeleteInStart() {
         Rope rope = Rope.toRope("Word");
-        rope.delete(0, 2);
+        rope = rope.delete(0, 2);
         assertThat(rope.toString()).isEqualTo("rd");
     }
 
@@ -144,7 +144,7 @@ public class RopeTest {
     @Test
     public void testDeleteInEnd() {
         Rope rope = Rope.toRope("Word");
-        rope.delete(1, 3);
+        rope = rope.delete(1, 3);
         assertThat(rope.toString()).isEqualTo("W");
     }
 
@@ -152,7 +152,7 @@ public class RopeTest {
     @Test
     public void testDeleteEntireString() {
         Rope rope = Rope.toRope("Word");
-        rope.delete(0, 3);
+        rope = rope.delete(0, 4);
         assertThat(rope.toString()).isEqualTo("");
     }
 
