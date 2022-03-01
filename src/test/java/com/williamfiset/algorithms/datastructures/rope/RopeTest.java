@@ -6,19 +6,24 @@ import org.junit.*;
 
 public class RopeTest {
 
+    /**
+     * Tests that an empty string results in a proper structure.
+     */
     @Test
     public void testEmpty(){
+        Rope.Node expected = node(leaf(""), null);
         Rope rope = new Rope("");
-        assertThat(rope.root).isNotNull();
-        assertThat(rope.root.left).isNull();
-        assertThat(rope.root.right).isNull();
+        assertThat(new NodeWrapper(rope.root)).isEqualTo(expected);
     }
 
+    /**
+     * Tests that a trivial non empty string results in a simple structure.
+     */
     @Test
     public void testOne() {
+        Rope.Node expected = node(leaf("a"), null);
         Rope rope = new Rope("a");
-        assertThat(rope.root.left).isNotNull();
-        assertThat(rope.root.left.str).isEqualTo("a");
+        assertThat(new NodeWrapper(rope.root)).isEqualTo(expected);
     }
 
     /**
@@ -39,5 +44,30 @@ public class RopeTest {
     public void testIndexUnderScore(){
         Rope rope = new Rope("test_test");
         assertThat(rope.index(4)).isEqualTo('_');
+    }
+
+    private static int totalCount(Rope.Node node) {
+        if (node == null) {
+            return 0;
+        }
+        if (node.str != null) {
+            return node.count;
+        }
+        return totalCount(node.left) + totalCount(node.right);
+    }
+
+    private static Rope.Node node(Rope.Node left, Rope.Node right) {
+        Rope.Node newNode = new Rope.Node();
+        newNode.left = left;
+        newNode.right = right;
+        newNode.count = totalCount(left);
+        return newNode;
+    }
+
+    private static Rope.Node leaf(String s) {
+        Rope.Node newLeaf = new Rope.Node();
+        newLeaf.str = s;
+        newLeaf.count = s.length();
+        return newLeaf;
     }
 }
