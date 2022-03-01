@@ -1,4 +1,4 @@
-//package com.williamfiset.algorithms.datastructures.rope;
+package com.williamfiset.algorithms.datastructures.rope;
 
 
 //import com.williamfiset.algorithms.datastructures.segmenttree.Node;
