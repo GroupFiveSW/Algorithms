@@ -36,8 +36,6 @@ public class Rope {
         if(len <= leafLength){
             parent.str = s;
             parent.count = len;
-            System.out.print("\n\nString of leaf: " + s);
-            System.out.print("\n\n len of leaf: " + parent.count);
             return parent;
         }
         Node left = new Node();
@@ -56,7 +54,6 @@ public class Rope {
         if (parent.left.right != null){
             parent.count += parent.left.right.count;
         }
-        System.out.print("\n\n len of leaf: " + parent.count);
         return parent;
     }
 
@@ -67,7 +64,7 @@ public class Rope {
         treeBuilder(left,s);
     }
 
-    public int split(int i){
+    public char index(int i){
         Node currentNode = root;
         while(currentNode.left != null){
             if(i<currentNode.count){
@@ -78,14 +75,14 @@ public class Rope {
                 currentNode=currentNode.right;
             }
         }
-        return 0;
+        return currentNode.str.charAt(i);
     }
 
 
     public static void main(String[] args) {
         Rope r = new Rope("golfbanan");
         //System.out.print("\n\n count root right:  " + r.root.right.left.count);
-        int k = r.split(5);
+        System.out.println(r.index(5));;
 
     }
 }
