@@ -37,7 +37,7 @@ public class RopeTest {
     //Test for REQ-1 with single letter at start
     @Test
     public void testInsertAtIndexSingleStart(){
-        Rope rope = new Rope("Word");
+        Rope rope = Rope.toRope("Word");
         rope.insert(0,"A");
         assertThat(rope.toString()).isEqualTo("AWord");
         assertThat(rope.index(0)).isEqualTo('A');
@@ -46,7 +46,7 @@ public class RopeTest {
     //Test for REQ-1 with single letter at end
     @Test
     public void testInsertAtIndexSingleEnd(){
-        Rope rope = new Rope("Word");
+        Rope rope = Rope.toRope("Word");
         rope.insert(4,"A");
         assertThat(rope.toString()).isEqualTo("WordA");
         assertThat(rope.index(4)).isEqualTo('A');
@@ -55,7 +55,7 @@ public class RopeTest {
     //Test for REQ-1 with full word at start
     @Test
     public void testInsertAtIndexFullStart(){
-        Rope rope = new Rope("Lorem");
+        Rope rope = Rope.toRope("Word");
         rope.insert(0,"Another");
         assertThat(rope.toString()).isEqualTo("AnotherWord");
         assertThat(rope.index(0)).isEqualTo('A');
@@ -64,7 +64,7 @@ public class RopeTest {
     //Test for REQ-1 with full word at end
     @Test
     public void testInsertAtIndexFullEnd(){
-        Rope rope = new Rope("Word");
+        Rope rope = Rope.toRope("Word");
         rope.insert(4,"Another");
         assertThat(rope.toString()).isEqualTo("WordAnother");
         assertThat(rope.index(4)).isEqualTo('A');
@@ -88,6 +88,35 @@ public class RopeTest {
     public void testIndexUnderScore(){
         Rope rope = Rope.toRope("test_test");
         assertThat(rope.index(4)).isEqualTo('_');
+    }
+
+
+    /**
+     * Test cases that tests REQ-3 that Split(i,S) * should split the string S into
+     * two new strings S1 and S2, S1 = C1,...,Ci and S2 = Ci+1,...Cm
+     */
+    //Test for REQ-3 that should return two words, split in middle
+    @Test
+    public void testSplitInMiddle(){
+        Rope rope = Rope.toRope("Word");
+        RopePair expected = rope.split(1);
+        String left = expected.getLeft().toString();
+        String right = expected.getRight().toString();
+
+        assertThat(left).isEqualTo("Wo");
+        assertThat(right).isEqualTo("rd");
+    }
+
+    //Test for REQ-3 that should return two words, split at the end
+    @Test
+    public void testSplitAtEnd(){
+        Rope rope = Rope.toRope("Word");
+        RopePair expected = rope.split(3);
+        String left = expected.getLeft().toString();
+        String right = expected.getRight().toString();
+
+        assertThat(left).isEqualTo("Word");
+        assertThat(right).isEqualTo("");
     }
 
     /**
