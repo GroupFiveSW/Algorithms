@@ -120,6 +120,43 @@ public class RopeTest {
     }
 
     /**
+     * Test cases that tests REQ-4 that Delete(i,j):
+     * should delete the substring Ci,...Ci+j-1, from s to
+     * form a new string C1,...Ci-1,Ci+j,...,Cm
+     */
+    //Test for REQ-4 that should a string where the middle is deleted
+    @Test
+    public void testDeleteInMiddle(){
+        Rope rope = Rope.toRope("Word");
+        rope.delete(1,2);
+        assertThat(rope.toString()).isEqualTo("Wd");
+    }
+
+    //Test for REQ-4 that should return a string where the start is deleted
+    @Test
+    public void testDeleteInStart(){
+        Rope rope = Rope.toRope("Word");
+        rope.delete(0,2);
+        assertThat(rope.toString()).isEqualTo("rd");
+    }
+
+    //Test for REQ-4 that should return a string where the end is deleted
+    @Test
+    public void testDeleteInEnd(){
+        Rope rope = Rope.toRope("Word");
+        rope.delete(1,3);
+        assertThat(rope.toString()).isEqualTo("W");
+    }
+
+    //Test for REQ-4 that should return an empty string
+    @Test
+    public void testDeleteEntireString(){
+        Rope rope = Rope.toRope("Word");
+        rope.delete(0,3);
+        assertThat(rope.toString()).isEqualTo("");
+    }
+
+    /**
      * Test case that tests REQ-6 (that <code>concat(s)</code> concatenates the rope with s).
      * Tests that a small string concatenates correctly with another small string.
      */
