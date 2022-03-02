@@ -156,6 +156,52 @@ public class RopeTest {
         assertThat(rope.toString()).isEqualTo("");
     }
 
+
+    // Test for REQ-4 that leaf correctly deletes the whole string.
+    @Test
+    public void testDeleteEntireStringLeaf(){
+        String s = "abcdefg";
+        String expected = "";
+        Leaf l = new Leaf(s);
+        int start = 0;
+        int length = 7;
+        String result = l.delete(start,length).toString();
+        assertThat(result).isEqualTo(expected);
+    }
+
+    // Test for REQ-4 that leaf correctly deletes nothing.
+    @Test
+    public void testDeleteNothingLeaf(){
+        String s = "abcdefg";
+        String expected = s;
+        Leaf l = new Leaf(s);
+        int start = 1;
+        int length = 0;
+        String result = l.delete(start,length).toString();
+        assertThat(result).isEqualTo(expected);
+    }
+
+
+
+    //Test for REQ-4 for leaf that correcty deletes a beginning part of a string.
+    @Test
+    public void testDeleteBeginningLeaf() {
+        Leaf l = new Leaf("testString");
+        String expected = "String";
+        String result = l.delete(0, 4).toString();
+        assertThat(result).isEqualTo(expected);
+    }
+
+    //Test for REQ-4 for leaf to ensure correct deletion of end part of string
+    @Test
+    public void testDeleteEndLeaf() {
+        Leaf l = new Leaf("testString");
+        String expected = "test";
+        String result = l.delete(4, 6).toString();
+        assertThat(result).isEqualTo(expected);
+    }
+
+
     /**
      * Test case that tests REQ-6 (that <code>concat(s)</code> concatenates the rope with s).
      * Tests that a small string concatenates correctly with another small string.
