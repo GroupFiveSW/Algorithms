@@ -34,7 +34,7 @@ public class RopeTest {
      * should insert the string S beginning at position i in the string s, to form a new string
      */
 
-    //Test for REQ-1 with single letter at start
+    //Test for REQ-1 with single letter at start using Node rope.
     @Test
     public void testInsertAtIndexSingleStart() {
         Rope rope = Rope.toRope("Word");
@@ -43,7 +43,7 @@ public class RopeTest {
         assertThat(rope.index(0)).isEqualTo('A');
     }
 
-    //Test for REQ-1 with single letter at end
+    //Test for REQ-1 with single letter at end using Node rope.
     @Test
     public void testInsertAtIndexSingleEnd() {
         Rope rope = Rope.toRope("Word");
@@ -52,7 +52,7 @@ public class RopeTest {
         assertThat(rope.index(4)).isEqualTo('A');
     }
 
-    //Test for REQ-1 with full word at start
+    //Test for REQ-1 with full word at start using Node rope.
     @Test
     public void testInsertAtIndexFullStart() {
         Rope rope = Rope.toRope("Word");
@@ -61,11 +61,47 @@ public class RopeTest {
         assertThat(rope.index(0)).isEqualTo('A');
     }
 
-    //Test for REQ-1 with full word at end
+    //Test for REQ-1 with full word at end using Node rope.
     @Test
     public void testInsertAtIndexFullEnd() {
         Rope rope = Rope.toRope("Word");
         rope = rope.insert(4, Rope.toRope("Another"));
+        assertThat(rope.toString()).isEqualTo("WordAnother");
+        assertThat(rope.index(4)).isEqualTo('A');
+    }
+
+    //Test for REQ-1 with single letter at start using Leaf rope.
+    @Test
+    public void testLeafInsertAtIndexSingleStart() {
+        Leaf leaf = new Leaf("Word");
+        Rope rope = leaf.insert(0, new Leaf("A"));
+        assertThat(rope.toString()).isEqualTo("AWord");
+        assertThat(rope.index(0)).isEqualTo('A');
+    }
+
+    //Test for REQ-1 with single letter at end using Leaf rope.
+    @Test
+    public void testLeafInsertAtIndexSingleEnd() {
+        Leaf leaf = new Leaf("Word");
+        Rope rope = leaf.insert(4, new Leaf("A"));
+        assertThat(rope.toString()).isEqualTo("WordA");
+        assertThat(rope.index(4)).isEqualTo('A');
+    }
+
+    //Test for REQ-1 with full word at start using Leaf rope.
+    @Test
+    public void testLeafInsertAtIndexFullStart() {
+        Leaf leaf = new Leaf("Word");
+        Rope rope = leaf.insert(0, new Leaf("Another"));
+        assertThat(rope.toString()).isEqualTo("AnotherWord");
+        assertThat(rope.index(0)).isEqualTo('A');
+    }
+
+    //Test for REQ-1 with full word at end using Leaf rope.
+    @Test
+    public void testLeafInsertAtIndexFullEnd() {
+        Leaf leaf = new Leaf("Word");
+        Rope rope = leaf.insert(4, new Leaf("Another"));
         assertThat(rope.toString()).isEqualTo("WordAnother");
         assertThat(rope.index(4)).isEqualTo('A');
     }
