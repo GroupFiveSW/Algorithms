@@ -171,6 +171,30 @@ public class RopeTest {
     }
 
     /**
+     * Test case that tests REQ-6 (that <code>concat(s)</code> concatenates the rope with s).
+     * Tests that an empty string concatenates correctly with a non-empty string.
+     */
+    @Test
+    public void testConcatEmptyStart() {
+        String s2 = "Second part";
+        Rope rope = Rope.toRope("");
+        rope = rope.concat(Rope.toRope(s2));
+        assertThat(rope.toString()).isEqualTo(s2);
+    }
+
+    /**
+     * Test case that tests REQ-6 (that <code>concat(s)</code> concatenates the rope with s).
+     * Tests that a non-empty string concatenates correctly with an empty string.
+     */
+    @Test
+    public void testConcatEmptyEnd() {
+        String s1 = "First part";
+        Rope rope = Rope.toRope(s1);
+        rope = rope.concat(Rope.toRope(""));
+        assertThat(rope.toString()).isEqualTo(s1);
+    }
+
+    /**
      * Test case that tests REQ-3 (that <code>split(i)</code> splits the rope at index i).
      * Tests that a normal string is split properly at the correct place.
      */
