@@ -216,7 +216,7 @@ public class RopeTest {
     @Test
     public void testReport() {
         String s = "Lorem_abcd_efgh_ipsum";
-        int startIndex = 7, length = 5;
+        int startIndex = 5, length = 5;
         String expected = s.substring(startIndex, startIndex + length);
         Rope rope = Rope.toRope(s);
         String result = rope.report(startIndex, length).toString();
@@ -234,5 +234,33 @@ public class RopeTest {
         Rope rope = Rope.toRope(s);
         String result = rope.report(startIndex, length).toString();
         assertThat(result).isEqualTo("");
+    }
+
+    /**
+     * Test case that tests REQ-5 (that <code>report(i, j)</code> returns chars C(i)..C(i+j-1).
+     * Tests that a leaf report in the middle of a normal string is reported correctly.
+     */
+    @Test
+    public void testReportLeaf() {
+        String s = "abcdef";
+        int startIndex = 2, length = 2;
+        String expected = s.substring(startIndex, startIndex + length);
+        Leaf leaf = new Leaf(s);
+        String result = leaf.report(startIndex, length).toString();
+        assertThat(result).isEqualTo(expected);
+    }
+
+    /**
+     * Test case that tests REQ-5 (that <code>report(i, j)</code> returns chars C(i)..C(i+j-1).
+     * Tests that a leaf report of length 0 results in an empty string.
+     */
+    @Test
+    public void testReportLeafNoLength() {
+        String s = "abcdef";
+        int startIndex = 2, length = 0;
+        String expected = s.substring(startIndex, startIndex + length);
+        Leaf leaf = new Leaf(s);
+        String result = leaf.report(startIndex, length).toString();
+        assertThat(result).isEqualTo(expected);
     }
 }
