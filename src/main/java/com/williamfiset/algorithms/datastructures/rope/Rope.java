@@ -13,18 +13,9 @@ public abstract class Rope {
     static Rope treeBuilder(String s){
         int len = s.length();
         if(len <= leafLength){
-            Leaf leaf = new Leaf(s);
-            return leaf;
+            return new Leaf(s);
         }
-        Node node = new Node();
-
-        String leftStr = s.substring(0,(len/2));
-        node.setLeft(treeBuilder(leftStr));
-
-        String rightStr = s.substring((len/2));
-        node.setRight(treeBuilder(rightStr));
-
-        return node;
+        return new Node(s);
     }
 
     public static Rope toRope(String s){
@@ -47,10 +38,12 @@ public abstract class Rope {
 
     public abstract Rope delete(int start, int length);
 
-    public static void main(String[] args) {
-        Rope r = Rope.toRope("golfbanan");
-        //System.out.print("\n\n count root right:  " + r.root.right.left.count);
-        System.out.println(r.index(5));;
-        System.out.println("char at index 5:   " + r.index(5));
+    @Override
+    public String toString() {
+        StringBuffer buffer = new StringBuffer();
+        addToBuffer(buffer);
+        return buffer.toString();
     }
+
+    protected abstract void addToBuffer(StringBuffer buffer);
 }
