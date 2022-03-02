@@ -3,10 +3,10 @@ package com.williamfiset.algorithms.datastructures.rope;
 
 
 public class Leaf extends Rope{
-    String str;
+    private String str;
 
 
-    public Leaf(String str) {
+    Leaf(String str) {
         this.str = str;
         count = str.length();
         totalCount = str.length();
@@ -19,10 +19,7 @@ public class Leaf extends Rope{
 
     @Override
     public Rope concat(Rope other) {
-        Node newRoot = new Node();
-        newRoot.setLeft(this);
-        newRoot.setRight(other);
-        return newRoot;
+        return new Node(this, other);
     }
 
     @Override
@@ -50,7 +47,7 @@ public class Leaf extends Rope{
     }
 
     @Override
-    public String toString(){
-        return str;
+    protected void addToBuffer(StringBuffer buffer) {
+        buffer.append(str);
     }
 }

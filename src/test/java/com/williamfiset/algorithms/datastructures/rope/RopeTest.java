@@ -208,27 +208,4 @@ public class RopeTest {
         assertThat(pair.getLeft().toString()).isEqualTo(s1);
         assertThat(pair.getRight().toString()).isEqualTo(s2);
     }
-
-    private static int totalCount(Rope rope) {
-        if (rope == null) {
-            return 0;
-        }
-        if (rope instanceof Leaf) {
-            return ((Leaf) rope).str.length();
-        }
-        Node node = (Node) rope;
-        return totalCount(node.left) + totalCount(node.right);
-    }
-
-    private static Node node(Rope left, Rope right) {
-        Node newNode = new Node();
-        newNode.left = left;
-        newNode.right = right;
-        newNode.count = totalCount(left);
-        return newNode;
-    }
-
-    private static Leaf leaf(String s) {
-        return new Leaf(s);
-    }
 }

@@ -1,26 +1,29 @@
 package com.williamfiset.algorithms.datastructures.rope;
 
 public class Node extends Rope {
-    Rope left;
-    Rope right;
+    private Rope left;
+    private Rope right;
 
-    public Node(int count) {
-        this.count = count;
+    Node(String s) {
+        int len = s.length();
+        String leftStr = s.substring(0, (len / 2));
+        setLeft(toRope(leftStr));
+        String rightStr = s.substring((len / 2));
+        setRight(toRope(rightStr));
     }
 
-    public Node() {
-        count = 0;
-        left = null;
-        right = null;
+    Node(Rope left, Rope right) {
+        setLeft(left);
+        setRight(right);
     }
 
-    void setLeft(Rope rope) {
+    private void setLeft(Rope rope) {
         left = rope;
         count = rope.totalCount;
         totalCount = rope.totalCount + (right == null ? 0 : right.totalCount);
     }
 
-    void setRight(Rope rope) {
+    private void setRight(Rope rope) {
         right = rope;
         totalCount = rope.totalCount + (left == null ? 0 : left.totalCount);
     }
@@ -41,30 +44,16 @@ public class Node extends Rope {
      */
     @Override
     public Rope concat(Rope other) {
-        Node newRoot = new Node();
-        newRoot.setLeft(this);
-        newRoot.setRight(other);
-        return newRoot;
+        return new Node(this, other);
     }
-
 
     @Override
-    public String toString() {
-        StringBuffer buffer = new StringBuffer();
-        buildBuffer(buffer);
-        return buffer.toString();
-    }
-
-    private void buildBuffer(StringBuffer buffer) {
-        if (left instanceof Node) {
-            ((Node) left).buildBuffer(buffer);
-        } else if (left instanceof Leaf) {
-            buffer.append(left);
+    protected void addToBuffer(StringBuffer buffer) {
+        if (left != null) {
+            left.addToBuffer(buffer);
         }
-        if (right instanceof Node) {
-            ((Node) right).buildBuffer(buffer);
-        } else if (right instanceof Leaf) {
-            buffer.append(right);
+        if (right != null) {
+            right.addToBuffer(buffer);
         }
     }
 
