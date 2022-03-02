@@ -52,6 +52,24 @@ public class RopeTest {
         assertThat(rope.index(4)).isEqualTo('A');
     }
 
+    //Test for REQ-1 with single letter in the middle using Node rope.
+    @Test
+    public void testInsertAtIndexSingleMiddle() {
+        Rope rope = Rope.toRope("Word");
+        rope = rope.insert(2, Rope.toRope("A"));
+        assertThat(rope.toString()).isEqualTo("WoArd");
+        assertThat(rope.index(2)).isEqualTo('A');
+    }
+
+    //Test for REQ-1 with full word in the middle using Node rope.
+    @Test
+    public void testInsertAtIndexFullMiddle() {
+        Rope rope = Rope.toRope("Word");
+        rope = rope.insert(2, Rope.toRope("Another"));
+        assertThat(rope.toString()).isEqualTo("WoAnotherrd");
+        assertThat(rope.index(2)).isEqualTo('A');
+    }
+
     //Test for REQ-1 with full word at start using Node rope.
     @Test
     public void testInsertAtIndexFullStart() {
@@ -88,6 +106,24 @@ public class RopeTest {
         assertThat(rope.index(4)).isEqualTo('A');
     }
 
+    //Test for REQ-1 with single letter in the middle using Leaf rope.
+    @Test
+    public void testLeafInsertAtIndexSingleMiddle() {
+        Leaf leaf = new Leaf("Word");
+        Rope rope = leaf.insert(2, new Leaf("A"));
+        assertThat(rope.toString()).isEqualTo("WoArd");
+        assertThat(rope.index(2)).isEqualTo('A');
+    }
+
+    //Test for REQ-1 with full word in the middle using Leaf rope.
+    @Test
+    public void testLeafInsertAtIndexFullMiddle() {
+        Leaf leaf = new Leaf("Word");
+        Rope rope = leaf.insert(2, new Leaf("Another"));
+        assertThat(rope.toString()).isEqualTo("WoAnotherrd");
+        assertThat(rope.index(2)).isEqualTo('A');
+    }
+
     //Test for REQ-1 with full word at start using Leaf rope.
     @Test
     public void testLeafInsertAtIndexFullStart() {
@@ -105,6 +141,7 @@ public class RopeTest {
         assertThat(rope.toString()).isEqualTo("WordAnother");
         assertThat(rope.index(4)).isEqualTo('A');
     }
+
 
     /**
      * Test case that tests REQ-2 (that <code>Index(i)</code> should return the character at position i).
