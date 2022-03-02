@@ -59,8 +59,8 @@ public class Node extends Rope {
 
     @Override
     public Rope report(int start, int length) {
-        RopePair leftPair = split(start);
-        RopePair rightPair = leftPair.getRight().split(length);
+        RopePair leftPair = split(start-1);
+        RopePair rightPair = leftPair.getRight().split(length-1);
         return rightPair.getLeft();
     }
 
